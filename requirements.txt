@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pymupdf
+langchain
+openai
+faiss-cpu
+sqlalchemy
+psycopg2-binary
+pydantic
+python-multipart

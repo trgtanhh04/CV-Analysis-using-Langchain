@@ -1,0 +1,30 @@
+{
+    "full_name": "Nguyen Van A",
+    "email": "nguyenvana@example.com",
+    "phone": "0912345678",
+    "education": [
+        {
+            "degree": "Cử nhân Khoa học Máy tính",
+            "university": "ĐH Bách Khoa",
+            "start_year": 2020,
+            "end_year": 2024
+        }
+    ],
+    "experience": [
+        {
+            "job_title": "Intern Python Developer",
+            "company": "FPT Software",
+            "start_date": "06/2023",
+            "end_date": "08/2023",
+            "description": "Tham gia dự án AI chatbot bằng Flask."
+        }
+    ],
+    "skills": ["Python", "Machine Learning", "SQL", "Git", "Linux"],
+    "certifications": [
+        {
+            "certificate_name": "Google Data Analytics",
+            "organization": "Coursera"
+        }
+    ],
+    "languages": ["English - Intermediate", "Vietnamese - Native"]
+}
