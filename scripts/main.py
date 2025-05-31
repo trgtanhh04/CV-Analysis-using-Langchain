@@ -56,7 +56,7 @@ def create_or_get_language(db, name):
 
 if __name__ == "__main__":
     print("Running database test...")
-    db_session = SessionLocal()
+    db_session = SessionLocal() # Changed from get_db() to SessionLocal() for direct use
     try:
         # Test 1: Create a new skill
         skill_name_to_test = "TestSkill123"

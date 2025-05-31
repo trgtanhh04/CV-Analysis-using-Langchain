@@ -1,7 +1,7 @@
 import os
 import json
 import fitz  # PyMuPDF for PDF extraction
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.schema import HumanMessage
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
@@ -49,8 +49,8 @@ Extract the following candidate information fields from the CV content (as plain
 "languages": ["...", "..."]
 }}
 
-⚠️ Only include **real work experience** (e.g. internships, jobs at companies, freelance work) in the "experience" field.  
-⚠️ **Do not include personal, academic, or side projects** in the experience section.
+Only include **real work experience** (e.g. internships, jobs at companies, freelance work) in the "experience" field.  
+**Do not include personal, academic, or side projects** in the experience section.
 
 Only return the JSON content. Do not include any explanation.  
 If any field cannot be found, set it to null or empty array.

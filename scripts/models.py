@@ -36,6 +36,7 @@ class Education(Base):
     __tablename__ = 'education'
 
     id = Column(Integer, primary_key=True, index=True)
+    candidate_id = Column(Integer, ForeignKey('candidates.id'), nullable=False) # Added this line
     degree = Column(String, nullable=False)
     university = Column(String, nullable=False)
     start_year = Column(Integer, nullable=False)
