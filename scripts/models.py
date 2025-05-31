@@ -47,8 +47,8 @@ class Experience(Base):
     candidate_id = Column(Integer, ForeignKey('candidates.id'), nullable=False)
     job_title = Column(String, nullable=True)
     company = Column(String, nullable=True)
-    start_date = Column(String, nullable=True) # Changed from Date to String
-    end_date = Column(String, nullable=True)   # Changed from Date to String
+    start_date = Column(String, nullable=True) 
+    end_date = Column(String, nullable=True)   
     description = Column(Text, nullable=True)
 
     candidate = relationship('Candidate', back_populates='experience')
@@ -87,8 +87,8 @@ class Candidate(Base):
     __tablename__ = 'candidates'
 
     id = Column(Integer, primary_key=True, index=True)
-    full_name = Column(String, nullable=True)  # Changed
-    email = Column(String, nullable=True, unique=True)  # Changed nullable
+    full_name = Column(String, nullable=True)  
+    email = Column(String, nullable=True, unique=True) 
     phone = Column(String, nullable=True)
     embedding = Column(JSON, nullable=True)
 
