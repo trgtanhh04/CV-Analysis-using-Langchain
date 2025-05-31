@@ -93,7 +93,7 @@ async def create_candidate(
         raise HTTPException(status_code=400, detail="No full name found in CV")
     
     skill_text = ", ".join(info.get('skills', []))
-    exp_text = "\n".join([e.get('description', '') for e in info.get('experience', [])])
+    exp_text = "\n".join([safe_get(e.get('description'), default="") for e in info.get('experience', [])])
     embedding = get_embedding(f"{skill_text}\n{exp_text}")
 
     email = safe_get(info.get('email'), default="Unknown")
