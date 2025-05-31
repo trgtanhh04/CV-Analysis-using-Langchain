@@ -119,8 +119,8 @@ async def create_candidate(
             candidate_id=candidate.id,
             degree=safe_get(edu.get('degree')),
             university=safe_get(edu.get('university')),
-            start_year=edu.get('start_year') or 'Unknown',
-            end_year=edu.get('end_year') or 'Unknown'
+            start_year=str(edu.get('start_year') or 'Unknown'),
+            end_year=str(edu.get('end_year') or 'Unknown')
         ))
     
     # Add experience
@@ -160,11 +160,34 @@ async def create_candidate(
         full_name=candidate.full_name,
         email=candidate.email,
         phone=candidate.phone,
-        education=[e for e in info.get('education', [])],
-        experience=[e for e in info.get('experience', [])],
+        education=[
+            {
+                "degree": safe_get(e.get("degree")),
+                "university": safe_get(e.get("university")),
+                "start_year": str(e.get("start_year") or "Unknown"),
+                "end_year": str(e.get("end_year") or "Unknown"),
+            }
+            for e in info.get('education', [])
+        ],
+        experience=[
+            {
+                "job_title": safe_get(e.get("job_title")),
+                "company": safe_get(e.get("company")),
+                "start_date": parse_date(e.get("start_date")),
+                "end_date": parse_date(e.get("end_date")),
+                "description": safe_get(e.get("description"), default="Unknown"),
+            }
+            for e in info.get('experience', [])
+        ],
         skills=[s.name for s in candidate.skills],
-        certifications=[c for c in info.get('certifications', [])],
-        languages=[l.name for l in info.get('languages', [])],
+        certifications=[
+            {
+                "certificate_name": safe_get(c.get("certificate_name")),
+                "organization": safe_get(c.get("organization")),
+            }
+            for c in info.get('certifications', [])
+        ],
+        languages=[lang_obj.name for lang_obj in candidate.languages],
     )
     return output
 

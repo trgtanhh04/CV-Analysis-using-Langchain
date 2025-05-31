@@ -2,32 +2,31 @@ from pydantic import BaseModel
 from typing import List, Optional
 
 class Education(BaseModel):
-    degree: str
-    university: str
-    start_year: int
-    end_year: int
+    degree: Optional[str] = None
+    university: Optional[str] = None
+    start_year: Optional[str] = None
+    end_year: Optional[str] = None
 
 class Experience(BaseModel):
-    job_title: str
-    company: str
-    start_date: str
-    end_date: str
-    description: str
+    job_title: Optional[str] = None
+    company: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+    description: Optional[str] = None
 
 class Certification(BaseModel):
-    certificate_name: str
-    organization: str
+    certificate_name: Optional[str] = None
+    organization: Optional[str] = None
 
 class CandidateIn(BaseModel):
-    full_name: str
-    email: str
-    phone: str
-    education: List[Education]
-    experience: List[Experience]
-    skills: List[str]
-    certifications: List[Certification] 
-    languages: List[str]
+    full_name: Optional[str] = None
+    email: Optional[str] = None
+    phone: Optional[str] = None
+    education: List[Education] = []
+    experience: List[Experience] = []
+    skills: List[str] = []
+    certifications: List[Certification] = []
+    languages: List[str] = []
 
 class CandidateOut(CandidateIn):
     id: int
-
