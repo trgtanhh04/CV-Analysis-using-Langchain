@@ -3,19 +3,15 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    DateTime,
-    Boolean,
-    Text,
-    Table,
-    JSON,
     Date,
+    Text,
+    JSON,
+    Table,
 )
-
 from sqlalchemy.orm import relationship, declarative_base
 
 Base = declarative_base()
 
-# relationship n-n between candidates and skills
 candidate_skills = Table(
     'candidate_skills',
     Base.metadata,
@@ -23,7 +19,6 @@ candidate_skills = Table(
     Column('skill_id', Integer, ForeignKey('skills.id'))
 )
 
-# relationship n-n between candidates and languages
 candidate_languages = Table(
     'candidate_languages',
     Base.metadata,
@@ -36,23 +31,24 @@ class Education(Base):
     __tablename__ = 'education'
 
     id = Column(Integer, primary_key=True, index=True)
-    candidate_id = Column(Integer, ForeignKey('candidates.id'), nullable=False) # Added this line
-    degree = Column(String, nullable=False)
-    university = Column(String, nullable=False)
-    start_year = Column(Integer, nullable=False)
-    end_year = Column(Integer, nullable=False)
+    candidate_id = Column(Integer, ForeignKey('candidates.id'), nullable=False)
+    degree = Column(String, nullable=True)
+    university = Column(String, nullable=True)
+    start_year = Column(String, nullable=True)
+    end_year = Column(String, nullable=True)
 
     candidate = relationship('Candidate', back_populates='education')
+
 
 class Experience(Base):
     __tablename__ = 'experience'
 
     id = Column(Integer, primary_key=True, index=True)
     candidate_id = Column(Integer, ForeignKey('candidates.id'), nullable=False)
-    job_title = Column(String, nullable=False)
-    company = Column(String, nullable=False)
-    start_date = Column(Date, nullable=False)
-    end_date = Column(Date, nullable=False)
+    job_title = Column(String, nullable=True)
+    company = Column(String, nullable=True)
+    start_date = Column(String, nullable=True) # Changed from Date to String
+    end_date = Column(String, nullable=True)   # Changed from Date to String
     description = Column(Text, nullable=True)
 
     candidate = relationship('Candidate', back_populates='experience')
@@ -63,10 +59,11 @@ class Certification(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     candidate_id = Column(Integer, ForeignKey('candidates.id'), nullable=False)
-    certificate_name = Column(String, nullable=False)
-    organization = Column(String, nullable=False)
+    certificate_name = Column(String, nullable=True)  # Changed
+    organization = Column(String, nullable=True)  # Changed
 
     candidate = relationship('Candidate', back_populates='certifications')
+
 
 class Skill(Base):
     __tablename__ = 'skills'
@@ -76,6 +73,7 @@ class Skill(Base):
 
     candidates = relationship('Candidate', secondary=candidate_skills, back_populates='skills')
 
+
 class Language(Base):
     __tablename__ = 'languages'
 
@@ -84,21 +82,18 @@ class Language(Base):
 
     candidates = relationship('Candidate', secondary=candidate_languages, back_populates='languages')
 
+
 class Candidate(Base):
     __tablename__ = 'candidates'
 
     id = Column(Integer, primary_key=True, index=True)
-    full_name = Column(String, nullable=False)
-    email = Column(String, nullable=False, unique=True)
+    full_name = Column(String, nullable=True)  # Changed
+    email = Column(String, nullable=True, unique=True)  # Changed nullable
     phone = Column(String, nullable=True)
-    
-    # 1-n relationships
+    embedding = Column(JSON, nullable=True)
+
     education = relationship('Education', back_populates='candidate', cascade='all, delete-orphan')
     experience = relationship('Experience', back_populates='candidate', cascade='all, delete-orphan')
     certifications = relationship('Certification', back_populates='candidate', cascade='all, delete-orphan')
-
-    # n-n relationships
     skills = relationship('Skill', secondary=candidate_skills, back_populates='candidates')
     languages = relationship('Language', secondary=candidate_languages, back_populates='candidates')
-
-    embedding = Column(JSON, nullable=True)  # For storing embeddings if needed

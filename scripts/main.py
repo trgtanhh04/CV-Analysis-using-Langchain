@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv() 
 import sys
 import os
+from dateutil import parser # Added import
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '')))
 from typing import List
@@ -29,14 +30,25 @@ def safe_get(value, default="Unknown"):
     return value
 
 def parse_date(date_str):
-    if isinstance(date_str, str):
-        return date_str.strip()
-    if isinstance(date_str, str):
-        try:
-            return datetime.strptime(date_str, "%Y-%m-%d").date()
-        except ValueError:
-            return date(1900, 1, 1)  # Default date if parsing fails
-    return date(1900, 1, 1)  
+    current_dt = datetime.now()
+
+    if not isinstance(date_str, str) or not date_str.strip():
+        return "Unknown"
+
+    cleaned_date_str = date_str.strip().lower()
+
+    # Handle common non-date strings
+    if cleaned_date_str in ("present", "current", "now", "na", "n/a", "null", "", "unknown"):
+        return "Unknown"
+    
+    try:
+        parsed_dt = parser.parse(date_str.strip(), default=current_dt)
+        return parsed_dt.strftime("%Y-%m-%d")
+    except (ValueError, TypeError, parser.ParserError):
+        return "Unknown"
+    except Exception:
+        return "Unknown"
+
 
 # Database session dependency
 def get_db():
@@ -107,8 +119,8 @@ async def create_candidate(
             candidate_id=candidate.id,
             degree=safe_get(edu.get('degree')),
             university=safe_get(edu.get('university')),
-            start_year=edu.get('start_year') or 0,
-            end_year=edu.get('end_year') or 0
+            start_year=edu.get('start_year') or 'Unknown',
+            end_year=edu.get('end_year') or 'Unknown'
         ))
     
     # Add experience
