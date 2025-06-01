@@ -1,5 +1,6 @@
 import faiss
 import numpy as np
+import json
 
 class CandidateFaissIndex:
 
@@ -11,7 +12,8 @@ class CandidateFaissIndex:
         vectors = []
         for c in candidate:
             if c.embedding:
-                vectors.append(c.embedding)
+                vector = json.loads(c.embedding)
+                vectors.append(vector)
                 self.id_map.append(c.id)
         if vectors:
             arr = np.array(vectors, dtype=np.float32)

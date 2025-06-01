@@ -207,8 +207,25 @@ async def create_candidate(
 
 # Searching candidates by attributes
 @app.get("/candidates/search/", response_model=List[CandidateOut])
-def search_candidates_semantic(query: str, db: Session = Depends(get_db), top_k: int = 5):
+def search_candidates_semantic(
+    job_title: str = None,
+    skills: List[str] = None,
+    experience: List[str] = None,
+    db: Session = Depends(get_db),
+    top_k: int = 5
+):  
+    
     global faiss_index
+
+    query_part = []
+    if job_title:
+        query_part.append(f"Job Title: {job_title}")
+    if skills:
+        query_part.append(f"Skills: {', '.join(skills)}")
+    if experience:
+        query_part.append(f"Experience: {', '.join(experience)}")
+    query = "\n".join(query_part).strip()
+    
     if not faiss_index:
         candidates = db.query(Candidate).filter(Candidate.embedding.isnot(None)).all()
         if not candidates:
