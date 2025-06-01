@@ -191,5 +191,15 @@ async def create_candidate(
     )
     return output
 
+
+# Searching candidates by attributes
+@app.get("/candidates/search/", response_model=List[CandidateOut])
+def search_candidates_semantic(query: str, db: Session = Depends(get_db), top_k: int = 5):
+    global faiss_index
+    if not faiss_index:
+        candidates = db.query(Candidate).filter(Candidate.embedding.isnot(None)).all()
+
+
+
 # uvicorn scripts.main:app --reload
 # Note: nếu chạy bị lỗi postgresql -> mở task bar -> kill postgresql server (do nó chiểm dụng cổng 5432)
