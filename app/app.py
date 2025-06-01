@@ -70,4 +70,4 @@ elif choice == "Search Candidates":
             else:
                 st.error(f"Lỗi: {response.text}")
 
-        # streamlit run app/app.py
+# streamlit run app/app.py
