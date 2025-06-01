@@ -5,6 +5,7 @@ DATA ARCHITECTURE
 - Full Name : Nguyen Van A
 - Email     : nguyenvana@example.com
 - Phone     : 0912345678
+- Job Title : Backend Developer
 
 2. Education
 ------------
