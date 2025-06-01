@@ -33,3 +33,5 @@ elif choice == "Search Candidates":
     skills = st.text_input("Enter skills (comma separated):")
     job_title = st.text_input("Enter job title:")
     
+
+# streamlit run app/app.py
