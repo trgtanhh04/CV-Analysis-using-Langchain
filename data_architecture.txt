@@ -1,0 +1,38 @@
+DATA ARCHITECTURE
+
+1. Personal Information
+-----------------------
+- Full Name : Nguyen Van A
+- Email     : nguyenvana@example.com
+- Phone     : 0912345678
+
+2. Education
+------------
+- Degree    : Cử nhân Khoa học Máy tính
+- University: ĐH Bách Khoa
+- Duration  : 2020 - 2024
+
+3. Experience
+-------------
+- Job Title : Intern Python Developer
+- Company   : FPT Software
+- Duration  : 06/2023 - 08/2023
+- Description: Tham gia dự án AI chatbot bằng Flask.
+
+4. Skills
+---------
+- Python
+- Machine Learning
+- SQL
+- Git
+- Linux
+
+5. Certifications
+-----------------
+- Certificate Name: Google Data Analytics
+- Organization   : Coursera
+
+6. Languages
+------------
+- English - Intermediate
+- Vietnamese - Native
