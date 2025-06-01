@@ -13,6 +13,7 @@ from typing import List
 from models import Candidate, Education, Experience, Certification, Skill, Language
 from candidate import CandidateIn, CandidateOut
 from info_extract import extract_text_from_pdf, extract_info
+from vector_db import CandidateFaissIndex
 from embedding import get_embedding
 from database import init_db, SessionLocal 
 from datetime import datetime, date
@@ -20,6 +21,9 @@ from datetime import datetime, date
 
 app = FastAPI() 
 init_db()
+
+faiss_index = None  
+EMBED_DIM = 1536
 
 # Procsess to handle None or empty values safely
 def safe_get(value, default="Unknown"):
@@ -198,7 +202,54 @@ def search_candidates_semantic(query: str, db: Session = Depends(get_db), top_k:
     global faiss_index
     if not faiss_index:
         candidates = db.query(Candidate).filter(Candidate.embedding.isnot(None)).all()
+        if not candidates:
+            raise HTTPException(status_code=404, detail="No candidates found")
+        faiss_index = CandidateFaissIndex(dim=EMBED_DIM)
+        faiss_index.add_embedding(candidates)
 
+    query_embedding = get_embedding(query)
+    candidates_ids = faiss_index.search(query_embedding, k=top_k)
+    results = db.query(Candidate).filter(Candidate.id.in_(candidates_ids)).all()
+    if not results:
+        raise HTTPException(status_code=404, detail="No candidates found")
+    
+    output = []
+    for c in results:
+        output.append(CandidateOut(
+            id=c.id,
+            full_name=c.full_name,
+            email=c.email,
+            phone=c.phone,
+            education=[
+                {
+                    "degree": safe_get(e.degree),
+                    "university": safe_get(e.university),
+                    "start_year": str(e.start_year or "Unknown"),
+                    "end_year": str(e.end_year or "Unknown"),
+                }
+                for e in c.education
+            ],
+            experience=[
+                {
+                    "job_title": safe_get(e.job_title),
+                    "company": safe_get(e.company),
+                    "start_date": parse_date(e.start_date),
+                    "end_date": parse_date(e.end_date),
+                    "description": safe_get(e.description, default="Unknown"),
+                }
+                for e in c.experience
+            ],
+            skills=[s.name for s in c.skills],
+            certifications=[
+                {
+                    "certificate_name": safe_get(cert.certificate_name),
+                    "organization": safe_get(cert.organization),
+                }
+                for cert in c.certifications
+            ],
+            languages=[lang.name for lang in c.languages],
+        ))
+    return output
 
 
 # uvicorn scripts.main:app --reload

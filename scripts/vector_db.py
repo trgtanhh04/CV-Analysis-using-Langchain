@@ -1,7 +1,7 @@
 import faiss
 import numpy as np
 
-class CandidateVectorDB:
+class CandidateFaissIndex:
 
     def __init__(self, dim):
         self.id_map = []
