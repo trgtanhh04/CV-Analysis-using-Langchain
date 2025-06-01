@@ -98,9 +98,9 @@ async def create_candidate(
 
     job_title = safe_get(info.get('job_title', 'Unknown'))
     skill_text = ", ".join(info.get('skills', []))
-    exp_text = "\n".join([safe_get(e.get('description'), default="") for e in info.get('experience', [])])
+    # exp_text = "\n".join([safe_get(e.get('description'), default="") for e in info.get('experience', [])])
 
-    embedding_input = f"Job Title: {job_title}\nSkills: {skill_text}\nExperience: {exp_text}"
+    embedding_input = f"Job Title: {job_title}\nSkills: {skill_text}"
     embedding = get_embedding(embedding_input)
 
     email = safe_get(info.get('email'), default="Unknown")
@@ -206,7 +206,6 @@ async def create_candidate(
 def search_candidates_semantic(
     job_title: str = None,
     skills: List[str] = None,
-    experience: List[str] = None,
     db: Session = Depends(get_db),
     top_k: int = 5
 ):  
@@ -218,10 +217,8 @@ def search_candidates_semantic(
         query_part.append(f"Job Title: {job_title}")
     if skills:
         query_part.append(f"Skills: {', '.join(skills)}")
-    if experience:
-        query_part.append(f"Experience: {', '.join(experience)}")
     query = "\n".join(query_part).strip()
-    
+
     if not faiss_index:
         candidates = db.query(Candidate).filter(Candidate.embedding.isnot(None)).all()
         if not candidates:

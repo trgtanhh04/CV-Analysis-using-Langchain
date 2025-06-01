@@ -27,11 +27,10 @@ def upload_cv(files):
             st.error(f"Upload failed: {file.name} - {response.text}")
     return success, fail, results
 
-def search_candidates(job_title, skills, experience):
+def search_candidates(job_title, skills):
     params = {
         "job_title": job_title,
-        "skills": [s.strip() for s in skills.split(",")] if skills else None,
-        "experience": [e.strip() for e in experience.split(",")] if experience else None
+        "skills": [s.strip() for s in skills.split(",")] if skills else None
     }
     response = requests.get(f"{API_URL}/candidates/search", params=params)
     if response.status_code == 200:
@@ -91,13 +90,12 @@ def main():
         with st.sidebar:
             job_title = st.text_input("Job Title")
             skills = st.text_input("Skills (comma separated)")
-            experience = st.text_input("Experience (comma separated)")
             search_btn = st.button("Search", key="search_btn")
         
         if search_btn or st.session_state.get("searched", False):
             st.session_state["searched"] = True
             with st.spinner("Searching..."):
-                results = search_candidates(job_title, skills, experience)
+                results = search_candidates(job_title, skills)
                 st.session_state["search_results"] = results
         
         # Display search results or detail
