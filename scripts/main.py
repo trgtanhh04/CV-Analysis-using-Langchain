@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv() 
 import sys
 import os
-from dateutil import parser # Added import
+from dateutil import parser
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '')))
 from typing import List
@@ -250,7 +250,5 @@ def search_candidates_semantic(query: str, db: Session = Depends(get_db), top_k:
             languages=[lang.name for lang in c.languages],
         ))
     return output
-
-
 # uvicorn scripts.main:app --reload
 # Note: nếu chạy bị lỗi postgresql -> mở task bar -> kill postgresql server (do nó chiểm dụng cổng 5432)
