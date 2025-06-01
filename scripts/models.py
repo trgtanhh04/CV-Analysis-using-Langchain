@@ -59,8 +59,8 @@ class Certification(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     candidate_id = Column(Integer, ForeignKey('candidates.id'), nullable=False)
-    certificate_name = Column(String, nullable=True)  # Changed
-    organization = Column(String, nullable=True)  # Changed
+    certificate_name = Column(String, nullable=True)  
+    organization = Column(String, nullable=True)  
 
     candidate = relationship('Candidate', back_populates='certifications')
 
