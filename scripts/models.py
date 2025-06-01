@@ -90,6 +90,7 @@ class Candidate(Base):
     full_name = Column(String, nullable=True)  
     email = Column(String, nullable=True, unique=True) 
     phone = Column(String, nullable=True)
+    job_title = Column(String, nullable=True)
     embedding = Column(JSON, nullable=True)
 
     education = relationship('Education', back_populates='candidate', cascade='all, delete-orphan')

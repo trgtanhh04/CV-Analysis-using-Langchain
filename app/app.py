@@ -41,7 +41,8 @@ def search_candidates(job_title, skills, experience):
         return []
 
 def candidate_detail(candidate):
-    st.subheader(f"🧑‍💼 {candidate.get('name', 'N/A')}")
+    st.subheader(f"🧑‍💼 {candidate.get('full_name', 'N/A')}")
+    st.write(f"**Job Title**: {candidate.get('job_title', 'N/A')}")
     st.write(f"**Email**: {candidate.get('email', 'N/A')}")
     st.write(f"**Phone**: {candidate.get('phone', 'N/A')}")
     st.write(f"**Skills**: {', '.join(candidate.get('skills', []))}")
@@ -107,6 +108,7 @@ def main():
             if st.button("Back to list"):
                 st.session_state["selected_candidate"] = None
                 st.rerun()
+
         elif "search_results" in st.session_state and st.session_state["search_results"]:
             st.write("### 📋 List of matching candidates")
             results = st.session_state["search_results"]
@@ -115,7 +117,8 @@ def main():
                 with col1:
                     st.markdown(f"#### {idx+1}")
                 with col2:
-                    st.markdown(f"**Name:** {row.get('name', 'N/A')}")
+                    st.markdown(f"**Name:** {row.get('full_name', 'N/A')}")
+                    st.markdown(f"**Job Title:** {row.get('job_title', 'N/A')}")
                     st.markdown(f"**Email:** {row.get('email', 'N/A')}")
                     st.markdown(f"**Skills:** {', '.join(row.get('skills', []))}")
                     if st.button("View Details", key=f"detail_{idx}"):

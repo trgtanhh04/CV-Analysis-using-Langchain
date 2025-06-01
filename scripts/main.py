@@ -119,6 +119,7 @@ async def create_candidate(
         full_name=safe_get(info.get('full_name')),
         email=email,
         phone=safe_get(info.get('phone')),
+        job_title=job_title,
         embedding=json.dumps(embedding)
     )
 
@@ -173,6 +174,7 @@ async def create_candidate(
         full_name=candidate.full_name,
         email=candidate.email,
         phone=candidate.phone,
+        job_title=safe_get(info.get('job_title', 'Unknown')),
         education=[
             {
                 "degree": safe_get(e.get("degree")),
@@ -246,6 +248,7 @@ def search_candidates_semantic(
             full_name=c.full_name,
             email=c.email,
             phone=c.phone,
+            job_title=safe_get(c.job_title, default="Unknown"),
             education=[
                 {
                     "degree": safe_get(e.degree),

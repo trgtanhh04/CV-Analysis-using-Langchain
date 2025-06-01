@@ -20,6 +20,7 @@ class Certification(BaseModel):
 
 class CandidateIn(BaseModel):
     full_name: Optional[str] = None
+    job_title: Optional[str] = None
     email: Optional[str] = None
     phone: Optional[str] = None
     education: List[Education] = []

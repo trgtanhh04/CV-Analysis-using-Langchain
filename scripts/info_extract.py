@@ -21,6 +21,7 @@ Extract the following candidate information fields from the CV content (as plain
 "full_name": "...",
 "email": "...",
 "phone": "...",
+"job_title": "...",
 "education": [
     {{
     "degree": "...",
