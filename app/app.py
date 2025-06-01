@@ -72,7 +72,7 @@ def main():
     if menu == "Upload CV":
         st.header("📤 Upload CVs")
         uploaded_files = st.file_uploader(
-            "Chọn nhiều file CV PDF", 
+            "Choose one or multiple PDF CV files", 
             type=["pdf"], 
             accept_multiple_files=True
         )
