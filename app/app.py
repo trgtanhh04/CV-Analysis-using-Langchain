@@ -43,6 +43,26 @@ elif choice == "Search Candidates":
             if response.status_code == 200:
                 results = response.json()
                 if results:
+                    for item in results:
+                        item['education'] = ", ".join([
+                            f"{edu.get('degree', 'N/A')} tại {edu.get('university', 'N/A')} ({edu.get('start_year', 'Unknown')} - {edu.get('end_year', 'Unknown')})"
+                            for edu in item.get('education', [])
+                        ])
+
+                        item['experience'] = ", ".join([
+                            f"{exp.get('job_title', 'N/A')} tại {exp.get('company', 'N/A')} ({exp.get('start_date', 'Unknown')} - {exp.get('end_date', 'Unknown')})"
+                            for exp in item.get('experience', [])
+                        ])
+
+                        item['certifications'] = ", ".join([
+                            f"{cert.get('certificate_name', 'N/A')} ({cert.get('organization', 'N/A')})"
+                            for cert in item.get('certifications', [])
+                        ])
+
+                        item['languages'] = ", ".join(item.get('languages', []))
+
+                        item['skills'] = ", ".join(item.get('skills', []))
+
                     df = pd.DataFrame(results)
                     st.dataframe(df)
                 else:
@@ -50,4 +70,4 @@ elif choice == "Search Candidates":
             else:
                 st.error(f"Lỗi: {response.text}")
 
-# streamlit run app/app.py
+        # streamlit run app/app.py
