@@ -2,16 +2,16 @@
 fastapi
 uvicorn
 
-# Streamlit UI
-streamlit
+# PDF handling
+pymupdf
 
 # Langchain & OpenAI
 openai
 langchain
 langchain-openai
 
-# PDF handling
-PyMuPDF
+# Streamlit UI
+streamlit
 
 # NLP & Embedding
 faiss-cpu
@@ -19,7 +19,9 @@ numpy
 
 # ORM & Database
 sqlalchemy
+psycopg2-binary
 pydantic
+python-multipart
 python-dotenv
 python-dateutil
 
