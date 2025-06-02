@@ -9,8 +9,10 @@ POSTGRES_DB = os.getenv("POSTGRES_DB", "cvdb")
 POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
 POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 
-
+# Local database URL
 # DATABASE_URL = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+
+# Render database URL (for production)
 DATABASE_URL = f"postgresql://postgres123:saW3kXjXXHZT3xni4cVCkM0tBQJpuKP2@dpg-d0ujljmmcj7s739op7og-a.oregon-postgres.render.com:5432/cvdb_65c9"
 
 
