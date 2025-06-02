@@ -20,7 +20,11 @@ from datetime import datetime, date
 
 
 app = FastAPI() 
+
+# Database for local
 # init_db()
+
+# Database for production
 @app.on_event("startup")
 def startup_event():
     print("Initializing database...")
