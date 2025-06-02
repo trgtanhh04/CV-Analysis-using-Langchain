@@ -20,7 +20,11 @@ from datetime import datetime, date
 
 
 app = FastAPI() 
-init_db()
+# init_db()
+@app.on_event("startup")
+def startup_event():
+    print("Initializing database...")
+    init_db()
 
 faiss_index = None  
 EMBED_DIM = 1536
