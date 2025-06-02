@@ -26,3 +26,4 @@ class CandidateFaissIndex:
         for i in I[0]:
             results.append(self.id_map[i])
         return results
+

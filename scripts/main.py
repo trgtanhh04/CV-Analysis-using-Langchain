@@ -272,3 +272,4 @@ def search_candidates_semantic(
     return output
 # uvicorn scripts.main:app --reload
 # Note: nếu chạy bị lỗi postgresql -> mở task bar -> kill postgresql server (do nó chiểm dụng cổng 5432)
+

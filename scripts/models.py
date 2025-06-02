@@ -98,3 +98,5 @@ class Candidate(Base):
     certifications = relationship('Certification', back_populates='candidate', cascade='all, delete-orphan')
     skills = relationship('Skill', secondary=candidate_skills, back_populates='candidates')
     languages = relationship('Language', secondary=candidate_languages, back_populates='candidates')
+
+    

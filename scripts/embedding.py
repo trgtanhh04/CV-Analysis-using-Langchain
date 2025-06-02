@@ -13,3 +13,5 @@ def get_embedding(text: str) -> list:
     except Exception as e:
         print(f"Error getting embedding: {e}")
         return []
+    
+    

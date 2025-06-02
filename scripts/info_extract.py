@@ -93,3 +93,4 @@ def extract_info(text: str) -> dict:
         candidate_info = {}
 
     return candidate_info
+

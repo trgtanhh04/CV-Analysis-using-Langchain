@@ -31,3 +31,5 @@ class CandidateIn(BaseModel):
 
 class CandidateOut(CandidateIn):
     id: int
+
+

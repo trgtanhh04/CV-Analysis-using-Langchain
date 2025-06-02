@@ -11,3 +11,5 @@ def init_db():
     """Initialize the database and create tables."""
     # Base.metadata.drop_all(bind=engine) # If you want to drop all tables first
     Base.metadata.create_all(bind=engine)
+
+    
