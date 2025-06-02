@@ -22,15 +22,9 @@ from datetime import datetime, date
 app = FastAPI() 
 
 # Database for local
-# init_db()
+init_db()
 
 # Database for production
-
-@app.on_event("startup")
-def startup_event():
-    print("Resetting database (delete all rows)...")
-    init_db()
-
 faiss_index = None  
 EMBED_DIM = 1536
 
