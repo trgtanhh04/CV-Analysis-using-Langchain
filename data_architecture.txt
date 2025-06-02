@@ -13,6 +13,7 @@ DATA ARCHITECTURE
 - University: ĐH Bách Khoa
 - Duration  : 2020 - 2024
 
+
 3. Experience
 -------------
 - Job Title : Intern Python Developer
