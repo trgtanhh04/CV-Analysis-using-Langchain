@@ -1,10 +1,30 @@
+# Web & API
 fastapi
 uvicorn
-pymupdf
-langchain
+
+# Streamlit UI
+streamlit
+
+# Langchain & OpenAI
 openai
+langchain
+langchain-openai
+
+# PDF handling
+PyMuPDF
+
+# NLP & Embedding
 faiss-cpu
+numpy
+
+# ORM & Database
 sqlalchemy
-psycopg2-binary
 pydantic
-python-multipart
+python-dotenv
+python-dateutil
+
+# HTTP requests
+requests
+
+# Data processing
+pandas
