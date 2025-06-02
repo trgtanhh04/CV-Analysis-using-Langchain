@@ -1,6 +1,7 @@
 import faiss
 import numpy as np
 import json
+from typing import List, Tuple
 
 class CandidateFaissIndex:
 
@@ -26,4 +27,4 @@ class CandidateFaissIndex:
         for i in I[0]:
             results.append(self.id_map[i])
         return results
-
+    

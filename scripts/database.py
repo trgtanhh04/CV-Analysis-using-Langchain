@@ -12,3 +12,4 @@ def init_db():
     Base.metadata.drop_all(bind=engine) # If you want to drop all tables first
     Base.metadata.create_all(bind=engine)
 
+

@@ -101,7 +101,6 @@ async def create_candidate(
 
     job_title = safe_get(info.get('job_title', 'Unknown'))
     skill_text = ", ".join(info.get('skills', []))
-    # exp_text = "\n".join([safe_get(e.get('description'), default="") for e in info.get('experience', [])])
 
     embedding_input = f"Job Title: {job_title}\nSkills: {skill_text}"
     embedding = get_embedding(embedding_input)
@@ -117,7 +116,7 @@ async def create_candidate(
         email=email,
         phone=safe_get(info.get('phone')),
         job_title=job_title,
-        embedding=json.dumps(embedding)
+        embedding=json.dumps(embedding.tolist()) if hasattr(embedding, 'tolist') else json.dumps(embedding) # Convert ndarray to list
     )
 
     db.add(candidate)
@@ -213,7 +212,7 @@ def search_candidates_semantic(
     top_k: int = 5
 ):  
     
-    global faiss_index
+    # global faiss_index
 
     query_part = []
     if job_title:
@@ -222,21 +221,26 @@ def search_candidates_semantic(
         query_part.append(f"Skills: {', '.join(skills)}")
     query = "\n".join(query_part).strip()
 
-    if not faiss_index:
-        candidates = db.query(Candidate).filter(Candidate.embedding.isnot(None)).all()
-        if not candidates:
-            raise HTTPException(status_code=404, detail="No candidates found")
-        faiss_index = CandidateFaissIndex(dim=EMBED_DIM)
-        faiss_index.add_embedding(candidates)
+    all_candidates_ebd = db.query(Candidate).filter(Candidate.embedding.isnot(None)).all()
+    if not all_candidates_ebd:
+        raise HTTPException(status_code=404, detail="No candidates found")
+    
+    curr_faiss_index = CandidateFaissIndex(dim=EMBED_DIM)
+    curr_faiss_index.add_embedding(all_candidates_ebd)
 
     query_embedding = get_embedding(query)
-    candidates_ids = faiss_index.search(query_embedding, k=top_k)
+    candidates_ids = curr_faiss_index.search(query_embedding, k=top_k)
     results = db.query(Candidate).filter(Candidate.id.in_(candidates_ids)).all()
-    if not results:
+
+    results_dict = {c.id: c for c in results}
+    sorted_candidates = [results_dict[cid] for cid in candidates_ids if cid in results_dict]
+
+
+    if not sorted_candidates:
         raise HTTPException(status_code=404, detail="No candidates found")
     
     output = []
-    for c in results:
+    for c in sorted_candidates:
         output.append(CandidateOut(
             id=c.id,
             full_name=c.full_name,
