@@ -25,9 +25,22 @@ app = FastAPI()
 # init_db()
 
 # Database for production
+def clear_all_tables():
+    db = SessionLocal()
+    try:
+        # Xóa theo thứ tự tránh lỗi khóa ngoại
+        db.query(Education).delete()
+        db.query(Skill).delete()
+        db.query(Language).delete()
+        db.query(Candidate).delete()
+        db.commit()
+    finally:
+        db.close()
+
 @app.on_event("startup")
 def startup_event():
-    print("Initializing database...")
+    print("Resetting database (delete all rows)...")
+    clear_all_tables()
     init_db()
 
 faiss_index = None  
