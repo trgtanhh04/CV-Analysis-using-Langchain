@@ -21,6 +21,10 @@ from datetime import datetime, date
 
 app = FastAPI() 
 
+@app.get("/")
+def read_root():
+    return {"status": "API is live!"}
+
 # Database for local
 init_db()
 
