@@ -235,7 +235,13 @@ def search_candidates_semantic(
     query_embedding = get_embedding(query)
     candidates_ids = curr_faiss_index.search(query_embedding, k=top_k)
     # Erase candidates same ids
-    candidates_ids = list(set(candidates_ids))
+    seen = set()
+    unique_candidates_ids = []
+    for cid in candidates_ids:
+        if cid not in seen:
+            unique_candidates_ids.append(cid)
+            seen.add(cid)
+    candidates_ids = unique_candidates_ids
 
     results = db.query(Candidate).filter(Candidate.id.in_(candidates_ids)).all()
     results_dict = {c.id: c for c in results}
