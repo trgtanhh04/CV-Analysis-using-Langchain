@@ -32,7 +32,7 @@ CV Analysis using Langchain là hệ thống phân tích, quản lý & tìm ki�
 
 ## Workflow hệ thống
 <p align="center">
-  <img src="https://raw.githubusercontent.com/trgtanhh04/End-to-End-MovieDB-Data-Engineering/main/images/work_flow.png" width="100%" alt="airflow">
+  <img src="https://raw.githubusercontent.com/trgtanhh04/CV-Analysis-using-Langchain/main/images/work_flow.png" width="100%" alt="airflow">
 </p>
 
 
@@ -58,7 +58,7 @@ CV Analysis using Langchain là hệ thống phân tích, quản lý & tìm ki�
 
 ## Kiến trúc dữ liệu & Database
 <p align="center">
-  <img src="https://raw.githubusercontent.com/trgtanhh04/End-to-End-MovieDB-Data-Engineering/main/images/erd_for_db.png" width="100%" alt="airflow">
+  <img src="https://raw.githubusercontent.com/trgtanhh04/CV-Analysis-using-Langchain/main/images/erd_for_db.png" width="100%" alt="airflow">
 </p>
 
 - **ORM:** Sử dụng SQLAlchemy, các bảng được ánh xạ thành các class Python, hỗ trợ cascade delete cho quan hệ 1-nhiều (Education, Experience, Certifications...).
