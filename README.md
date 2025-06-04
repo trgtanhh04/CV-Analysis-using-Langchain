@@ -31,6 +31,10 @@ CV Analysis using Langchain là hệ thống phân tích, quản lý & tìm ki�
   - Frontend: Streamlit Cloud
 
 ## Workflow hệ thống
+<p align="center">
+  <img src="https://raw.githubusercontent.com/trgtanhh04/End-to-End-MovieDB-Data-Engineering/main/images/work_flow.png" width="100%" alt="airflow">
+</p>
+
 
 1. **Người dùng tải lên CV (PDF)**  
    - Hệ thống tiếp nhận file PDF từ người dùng qua giao diện web.
@@ -53,6 +57,9 @@ CV Analysis using Langchain là hệ thống phân tích, quản lý & tìm ki�
 - Triển khai hệ thống lên Cloud (backend & frontend độc lập).
 
 ## Kiến trúc dữ liệu & Database
+<p align="center">
+  <img src="https://raw.githubusercontent.com/trgtanhh04/End-to-End-MovieDB-Data-Engineering/main/images/erd_for_db.png" width="100%" alt="airflow">
+</p>
 
 - **ORM:** Sử dụng SQLAlchemy, các bảng được ánh xạ thành các class Python, hỗ trợ cascade delete cho quan hệ 1-nhiều (Education, Experience, Certifications...).
 - **Chuẩn hóa bảng Skills & Languages** giúp tránh trùng lặp, dễ mở rộng & phân tích.
