@@ -101,7 +101,7 @@ CV Analysis using Langchain là hệ thống phân tích, quản lý & tìm ki�
 
 ## API tìm kiếm ứng viên
 <p align="center">
-  <img src="https://raw.githubusercontent.com/trgtanhh04/CV-Analysis-using-Langchain/images/ui_search_candidate.png" width="100%" alt="airflow">
+  <img src="https://raw.githubusercontent.com/trgtanhh04/CV-Analysis-using-Langchain/main/images/ui_search_candidate.png" width="100%" alt="airflow">
 </p>
 <p align="center">
   <img src="https://raw.githubusercontent.com/trgtanhh04/CV-Analysis-using-Langchain/main/images/ui_detail_candidates.png" width="100%" alt="airflow">
