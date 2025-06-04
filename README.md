@@ -122,7 +122,7 @@ CV Analysis using Langchain là hệ thống phân tích, quản lý & tìm ki�
 **Demo & liên kết:**
 - GitHub: [https://github.com/trgtanhh04/CV-Analysis-using-Langchain.git](https://github.com/trgtanhh04/CV-Analysis-using-Langchain.git)
 - Thử nghiệm Streamlit: [https://cv-analysis-using-langchain.streamlit.app/](https://cv-analysis-using-langchain.streamlit.app/)
-- Video demo: (bổ sung link Google Drive nếu có)
+- Video demo: [Link google drive](https://drive.google.com/file/d/1Ejc4ZNGIo79AFS7llz1DAQAcIxxn79Ha/view?usp=sharing)
 
 ## Hướng dẫn cài đặt & sử dụng
 
