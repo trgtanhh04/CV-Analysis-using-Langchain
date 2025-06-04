@@ -1,4 +1,4 @@
-# ScanCVtobuilddatabase
+# CV Analysis using Langchain
 **Building an Intelligent CV Analysis and Candidate Database System**
 
 ## Mục lục
@@ -10,13 +10,11 @@
 - [API tìm kiếm ứng viên](#api-tìm-kiếm-ứng-viên)
 - [Triển khai hệ thống](#triển-khai-hệ-thống)
 - [Hướng dẫn cài đặt & sử dụng](#hướng-dẫn-cài-đặt--sử-dụng)
-- [Liên hệ](#liên-hệ)
-
 ---
 
 ## Giới thiệu
 
-ScanCVtobuilddatabase là hệ thống phân tích, quản lý & tìm kiếm ứng viên thông minh, hỗ trợ doanh nghiệp và nhà tuyển dụng tự động hóa quy trình xử lý hồ sơ (CV). Hệ thống sử dụng AI, NLP & các công nghệ hiện đại để trích xuất, lưu trữ, tìm kiếm và so sánh hồ sơ ứng viên từ file PDF.
+CV Analysis using Langchain là hệ thống phân tích, quản lý & tìm kiếm ứng viên thông minh, hỗ trợ doanh nghiệp và nhà tuyển dụng tự động hóa quy trình xử lý hồ sơ (CV). Hệ thống sử dụng AI, NLP & các công nghệ hiện đại để trích xuất, lưu trữ, tìm kiếm và so sánh hồ sơ ứng viên từ file PDF.
 
 ## Công nghệ sử dụng
 
@@ -35,16 +33,16 @@ ScanCVtobuilddatabase là hệ thống phân tích, quản lý & tìm kiếm ứ
 ## Workflow hệ thống
 
 1. **Người dùng tải lên CV (PDF)**  
-   → Hệ thống tiếp nhận file PDF từ người dùng qua giao diện web.
+   - Hệ thống tiếp nhận file PDF từ người dùng qua giao diện web.
 
 2. **Xử lý nội dung CV bằng LangChain & LLM**  
-   → LangChain & OpenAI API phân tích, trích xuất thông tin ứng viên (cá nhân, học vấn, kinh nghiệm, kỹ năng, chứng chỉ, ngôn ngữ...) ra định dạng JSON chuẩn.
+   - LangChain & OpenAI API phân tích, trích xuất thông tin ứng viên (cá nhân, học vấn, kinh nghiệm, kỹ năng, chứng chỉ, ngôn ngữ...) ra định dạng JSON chuẩn.
 
 3. **Sinh Embedding & Lưu trữ dữ liệu**  
-   → Chuyển thông tin vừa trích xuất thành vector embedding (bằng FAISS) và lưu vào Vector Database để phục vụ tìm kiếm nhanh, đồng thời lưu dữ liệu gốc vào PostgreSQL.
+   - Chuyển thông tin vừa trích xuất thành vector embedding (bằng FAISS) và lưu vào Vector Database để phục vụ tìm kiếm nhanh, đồng thời lưu dữ liệu gốc vào PostgreSQL.
 
 4. **Tìm kiếm ứng viên**  
-   → Khi có nhu cầu tìm kiếm, hệ thống lọc ứng viên bằng truy vấn SQL trên PostgreSQL, sau đó sử dụng vector similarity để xếp hạng độ tương đồng và trả về top ứng viên phù hợp nhất.
+   - Khi có nhu cầu tìm kiếm, hệ thống lọc ứng viên bằng truy vấn SQL trên PostgreSQL, sau đó sử dụng vector similarity để xếp hạng độ tương đồng và trả về top ứng viên phù hợp nhất.
 
 ## Các chức năng chính
 
@@ -139,11 +137,3 @@ streamlit run app/app.py
 - OpenAI API key không được public vì lý do bảo mật.  
 - Bạn cần tự tạo [API key tại đây](https://platform.openai.com/account/api-keys) và thêm vào code trước khi chạy.
 
-## Liên hệ
-
-- Đồ án thực hiện bởi: **NexLab Technology**
-- Nếu có thắc mắc, vui lòng liên hệ qua [github.com/trgtanhh04](https://github.com/trgtanhh04) hoặc email trong code dự án.
-
----
-
-> Hệ thống đáp ứng đầy đủ các yêu cầu của đồ án, sẵn sàng mở rộng và tùy biến trong tương lai.
